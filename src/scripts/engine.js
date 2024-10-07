@@ -77,9 +77,11 @@ async function createCardImage(idCard, fieldSide) {
 
 async function setCardField(cardId) {
   await removeAllCardsImages();
+
   let cpuCardId = await getRandomCard();
-  state.fieldCards.player.style.display = "block";
-  state.fieldCards.cpu.style.display = "block";
+
+  await showHiddenCardFieldsImages(true);
+
   state.cardSprites.avatar.src = "";
   state.cardSprites.name.innerText = "";
   state.cardSprites.type.innerText = "";
@@ -166,8 +168,9 @@ async function drawCards(numberOfCards, fieldSide) {
 }
 
 async function resetDuel() {
-  state.fieldCards.player.style.display = "none";
-  state.fieldCards.cpu.style.display = "none";
+  await showHiddenCardFieldsImages(false);
+  state.fieldCards.player.src = "";
+  state.fieldCards.cpu.src = "";
   state.cardSprites.avatar.src = "";
   state.cardSprites.name.innerText = "";
   state.cardSprites.type.innerText = "";
